@@ -1,4 +1,5 @@
 version: 2.1
+
 jobs:
   build: 
     docker:
@@ -20,7 +21,7 @@ jobs:
             - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
       - run: npm i
       - run: npm run test
-  analyze:
+  analyse:
     docker:
       - image: cimg/node:15.1
     steps:
@@ -28,15 +29,16 @@ jobs:
       - restore_cache:
           keys:
             - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+
       - run: npm audit
 
 workflows:
-  my_workflow:
+  orb-free-workflow:
     jobs:
       - build
       - test:
         -requires:
-          - build
-      - analyze: 
+          -build
+      - analyse:
         -requires:
-          - test
+          -test
