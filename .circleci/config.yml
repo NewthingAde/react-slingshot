@@ -21,6 +21,7 @@ jobs:
             - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
       - run: npm i
       - run: npm run test
+      - run: npm run lint
   analyse:
     docker:
       - image: cimg/node:15.1
