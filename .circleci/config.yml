@@ -15,7 +15,7 @@ jobs:
       - run: npm i
       - run: npm run test
       - run: npm run lint
-  analyse:
+  analyze:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -29,7 +29,7 @@ workflows:
       - test:
           requires:
            - build
-      - analyse:
+      - analyze:
           requires:
             - test
 
